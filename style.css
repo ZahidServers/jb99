@@ -1,18 +1,22 @@
    @font-face {
       font-family: 'IvyJournal';
       src: url('IvyJournal-Regular.ttf');
+      font-display: swap;
     }
     @font-face {
       font-family: 'IvyJournal-Thin';
       src: url('IvyJournal-Thin.ttf');
+      font-display: swap;
     }
     @font-face {
       font-family: 'IvyJournal-Light';
       src: url('IvyJournal-Light.ttf');
+      font-display: swap;
     }
     @font-face {
       font-family: 'IvyJournal-SemiBold';
       src: url('IvyJournal-SemiBold.ttf');
+      font-display: swap;
     }
     :root{
       --bg: #f7eeea;
@@ -1539,3 +1543,4 @@
       transform: translateY(-2px);
       box-shadow: 0 16px 36px rgba(0,0,0,.12);
     }
+
