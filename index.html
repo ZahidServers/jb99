@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JB99 - Assignment</title>
+
+  <!-- Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Elegant serif for headings (close to your design) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- GSAP -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="preload" as="image" href="./1bhk_living&diningcam11.webp">
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <div class="nav" role="banner">
+    <div class="navInner">
+      <a class="navBrand" href="#top" aria-label="Codename JB99 Home">
+        <span class="dot" aria-hidden="true"></span>
+        <img style="width:60px" src="logobrand.webp" alt="Codename JB99">
+      </a>
+  
+      <button class="navMenu" type="button"
+        aria-label="Open menu"
+        aria-controls="mobileNav"
+        aria-expanded="false">
+        <span class="burger" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Overlay -->
+  <div class="navOverlay" data-nav-close tabindex="-1" aria-hidden="true"></div>
+  
+  <!-- Slide-in Drawer -->
+  <aside class="navDrawer" id="mobileNav" aria-label="Site Navigation" aria-hidden="true">
+    <div class="navDrawerTop">
+      <div class="navDrawerBrand">
+        <div class="mLogoBadge"><img src="logobrand.webp" alt="Codename JB99" width="54" height="54"></div>
+        <div>
+          <div class="navDrawerTitle">Codename JB99</div>
+          <div class="navDrawerSub">Where every generation feels at home</div>
+        </div>
+      </div>
+  
+      <button class="navClose" type="button" aria-label="Close menu" data-nav-close>
+        <span aria-hidden="true">✕</span>
+      </button>
+    </div>
+  
+    <nav class="navLinks" role="navigation">
+      <a href="#hallmarksPinWrap" class="navLink">Overview</a>
+      <a href="#hallmarks1" class="navLink">Hallmarks</a>
+      <a href="#configurations" class="navLink">Configurations</a>
+      <a href="#legacy" class="navLink">Legacy</a>
+      <a href="#connectivity" class="navLink">Connectivity</a>
+      <a href="#footer" class="navLink">Contact</a>
+    </nav>
+  
+    <div class="navDrawerBottom">
+      <a class="navCTA" href="#footer">Enquire Now</a>
+      <div class="navHint">Tip: Swipe right-to-left to close (Works in mobile)</div>
+    </div>
+  </aside>
+  
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="heroBg" id="heroBg"></div>
+    <div class="heroContent">
+      <div class="heroTitleWrap">
+        <div class="heroKicker reveal" id="heroKicker">WHERE EVERY GENERATION</div>
+        <h1 class="heroMain" id="heroTitle">
+          <span class="reveal">Feels at Home.</span>
+        </h1>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+
+    <!-- Overview + Hallmarks -->
+    <section class="section hallmarksPinWrap" style="margin-top:-70px;" id="hallmarksPinWrap">
+      <div class="panel" id="hallmarksSection">    
+        <div class="panelPad"><div class="patternBG"></div>
+
+          <br><br>
+
+          <h2 class="secTitle reveal">An Overview of Project</h2>
+          <p class="secDesc reveal">
+            A modern residential address in JB Nagar designed for every generation.
+            Smart layouts, curated amenities, and unmatched connectivity come together
+            to elevate everyday living at the heart of Andheri East.
+          </p>
+
+          <br><br><br><br>
+
+          <hr style="border: none; height: 1.5px; width: 100%; background-image: var(--gold-gradient);">
+
+          <br><br><br><br>
+
+          <h3 id="hallmarks1" class="secTitle reveal" style="margin-top:30px;">
+            Hallmarks of Codename JB99
+          </h3>
+
+          <div class="chipRow reveal">
+            <span class="chip">Supersized 1 and 2 BHK residences</span>
+            <span class="chip">Secure, Gated Community</span>
+            <span class="chip">Rooftop Amenities for Every Mood</span>
+            <span class="chip">Purposefully Planned for Better Living</span>
+            <span class="chip">JB Nagar’s Most Connected Location</span>
+          </div>
+
+          <!-- Hallmarks Slider -->
+          <div class="hallmarksWrap" style="margin-top:22px;">
+            <div class="hallmarksViewport revealScale" id="hallmarksViewport">
+              <div class="hallmarksMask" id="hallmarksMask">
+                <div class="hallmarksTrack" id="hallmarksTrack">
+
+                  <!-- Slide 1 (4 images) -->
+                  <div class="hallmarksItem"><img src="rectangle62.webp" alt=""></div>
+                  <div class="hallmarksItem"><img src="rectangle63.webp" alt=""></div>
+                  <div class="hallmarksItem"><img src="rectangle64.webp" alt=""></div>
+                  <div class="hallmarksItem"><img src="rectangle62 (1).webp" alt=""></div>
+
+                  <div class="hallmarksItem"><img src="rectangle64 (1).webp" alt=""></div>
+                  <div class="hallmarksItem"><img src="rectangle62.webp" alt=""></div>
+                  <div class="hallmarksItem"><img src="rectangle63.webp" alt=""></div>
+                  <div class="hallmarksItem"><img src="rectangle64.webp" alt=""></div>
+
+                  <div class="hallmarksItem"><img src="rectangle62 (1).webp" alt=""></div>
+                  <div class="hallmarksItem"><img src="rectangle64 (1).webp" alt=""></div>
+                  <div class="hallmarksItem"><img src="rectangle62.webp" alt=""></div>
+                  <div class="hallmarksItem"><img src="rectangle63.webp" alt=""></div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Horizontal slider line + knob -->
+            <div class="hallmarksBar revealScale" id="hallmarksBar">
+              <div class="hallmarksBarLine"></div>
+              <button class="hallmarksBarKnob" id="hallmarksKnob" aria-label="Drag slider">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                  <path d="M10 8l4 4-4 4" stroke="rgba(255,255,255,.95)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+    
+    <hr style="border: none; height: 2px; width: 100%; background-image: var(--gold-gradient);margin-top: 0;padding-top: 0;">
+
+    <!-- Configurations -->
+    <section id="configurations" class="section" style="margin-top: 22px;">
+      <div class="panel">
+        <div class="panelPad">
+
+          <h2 class="secTitle reveal">Configurations</h2>
+
+          <div class="configGrid">
+            <div>
+              <div class="configBox revealScale">
+                <img id="cfg1" src="rectangle62 (1).webp" alt="1BHK">
+              </div>
+              <div class="configLabelRow reveal">
+                <div class="selectWrapper">
+                  <select class="configSelect" data-target="cfg1">
+                    <option value="classic" selected>Classic</option>
+                    <option value="premium">Premium</option>
+                  </select>
+                  <svg style="height: 20px;" viewBox="0 0 24 24" fill="none">
+                    <path d="M6 9l6 6 6-6" stroke="rgba(176,122,77,.9)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>   
+                </div>             
+                <div style="opacity:.0">.</div>
+              </div>
+            </div>
+
+            <div>
+              <div class="configBox revealScale">
+                <img id="cfg2" src="rectangle64 (1).webp" alt="2BHK">
+              </div>
+              <div class="configLabelRow reveal">
+                <div class="selectWrapper">
+                  <select class="configSelect" data-target="cfg2">
+                    <option value="classic" selected>Classic</option>
+                    <option value="premium">Premium</option>
+                  </select>
+                  <svg style="height: 20px;" viewBox="0 0 24 24" fill="none">
+                    <path d="M6 9l6 6 6-6" stroke="rgba(176,122,77,.9)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>                
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <hr style="border: none; height: 2px; width: 100%; background-image: var(--gold-gradient);margin-bottom: 0;">
+
+    <!-- Legacy -->
+    <section id="legacy" class="section" >
+      <div class="panel">
+        <div class="panelPad"><div class="patternBG"></div>
+
+          <h2 class="secTitle reveal">The Legacy Behind the landmark</h2>
+
+          <div class="legacySliderWrap">
+            <div class="legacyViewport">
+              <div class="legacyTrack" id="legacyTrack">
+          
+                <div class="legacyGrid legacyGrid1">
+                  <div class="legacyCollage  blurZ1">
+                    <img src="legacy-gym-collage.webp" alt="Legacy collage - Gym">
+                    <div class="vDivider top"></div>
+                    <div class="vDivider bottom"></div>
+                
+                    <div class="legacyZone zone1">
+                      <h4>Gymnasium</h4>
+                      <p>A fully equipped, modern gymnasium designed to support fitness, strength and wellness, helping residents stay active every day.</p>
+                      <a href="#" class="enquire-btn">Enquire Now</a>
+                    </div>
+                
+                    <div class="legacyZone zone2">
+                      <h4>Walking Track</h4>
+                    </div>
+                
+                    <div class="legacyZone zone3">
+                      <h4>Rooftop Pool</h4>
+                    </div>
+                
+                    <div class="legacyZone zone4">
+                      <h4>Landscape Garden</h4>
+                    </div>
+                  </div>
+                </div>                
+          
+                <div class="legacyGrid legacyGrid2">
+                  <div class="legacyCollage blurZ2">
+                    <img src="legacy-walk-collage.webp" alt="Legacy collage - Gym">
+                    <div class="vDivider top"></div>
+                    <div class="vDivider bottom"></div>
+                
+                    <div class="legacyZone zone1">
+                      <h4>Gymnasium</h4>
+                    </div>
+                
+                    <div class="legacyZone zone2">
+                      <h4>Walking Track</h4>
+                      <p>
+                        A dedicated walking track that encourages a healthy lifestyle while connecting you with nature.
+                        Start your day with fresh air and rejuvenating steps.
+                      </p>
+                      <a href="#" class="enquire-btn">Enquire Now</a>
+                    </div>
+                
+                    <div class="legacyZone zone3">
+                      <h4>Rooftop Pool</h4>
+                    </div>
+                
+                    <div class="legacyZone zone4">
+                      <h4>Landscape Garden</h4>
+                    </div>
+                  </div>
+                </div>                
+          
+                <div class="legacyGrid legacyGrid3">
+                  <div class="legacyCollage blurZ3">
+                    <img src="legacy-pool-collage.webp" alt="Legacy collage - Gym">
+                    <div class="vDivider top"></div>
+                    <div class="vDivider bottom"></div>
+                
+                    <div class="legacyZone zone1">
+                      <h4>Gymnasium</h4>
+                    </div>
+                
+                    <div class="legacyZone zone2">
+                      <h4>Walking Track</h4>
+                    </div>
+                
+                    <div class="legacyZone zone3">
+                      <h4>Rooftop Pool</h4>
+                      <p>
+                        Experience bliss in a serene rooftop with spectacular city views.
+                        A perfect blend of luxury and leisure.
+                      </p>
+                      <a href="#" class="enquire-btn">Enquire Now</a>
+                    </div>
+                
+                    <div class="legacyZone zone4">
+                      <h4>Landscape Garden</h4>
+                    </div>
+                  </div>
+                </div>                
+          
+                <div class="legacyGrid legacyGrid4">
+                  <div class="legacyCollage blurZ4">
+                    <img src="legacy-garden-collage.webp" alt="Legacy collage - Gym">
+                    <div class="vDivider top"></div>
+                    <div class="vDivider bottom"></div>
+                
+                    <div class="legacyZone zone1">
+                      <h4>Gymnasium</h4>
+                    </div>
+                
+                    <div class="legacyZone zone2">
+                      <h4>Walking Track</h4>
+                    </div>
+                
+                    <div class="legacyZone zone3">
+                      <h4>Rooftop Pool</h4>
+                    </div>
+                
+                    <div class="legacyZone zone4">
+                      <h4>Landscape Garden</h4>
+                      <p>
+                        A beautifully crafted landscape garden that brings nature closer to you everyday.
+                        Relax, Recharge and enjoy the serenity of fresh greenery.
+                      </p>
+                      <a href="#" class="enquire-btn">Enquire Now</a>
+                    </div>
+                  </div>
+                </div>                
+          
+              </div><br>
+            </div>
+          
+            <div class="legacyNav">
+              <button class="legacyBtn" id="legacyPrev">‹</button>
+              <button class="legacyBtn" id="legacyNext">›</button>
+            </div>
+          </div>          
+
+          <div class="brandSplit reveal" style="margin-top:26px;">
+
+            <div class="brandCard">
+              <div class="brandLogoRow">
+                <div class="brandMark">
+                  <img src="Frame465.webp" alt="Group Satellite Logo">
+                </div>
+                <div class="brandName">GROUP SATELLITE</div>
+              </div>
+          
+              <h3>Proudly Contributing to<br/>Andheri East's Story</h3>
+          
+              <p>
+                With decades of excellence, Group Satellite has shaped Andheri East with iconic commercial and
+                residential landmarks. Codename JB99 continues this trusted legacy of innovation and impact.
+              </p>
+            </div>
+          
+            <div class="divider"></div>
+          
+            <div class="brandCard">
+              <div class="brandLogoRow">
+                <div class="brandMark">
+                  <img src="Frame8139.webp" alt="Rockford Group Logo">
+                </div>
+                <div class="brandName">ROCKFORD GROUP</div>
+              </div>
+          
+              <h3>Building Trust.<br/>Shaping Futures.</h3>
+          
+              <p>
+                Built on trust and transparency, Rockford has crafted landmark addresses across Mumbai.
+                With design excellence and true customer focus, we create spaces that elevate every day.
+              </p>
+            </div>
+          
+          </div>          
+
+        </div>
+      </div>
+    </section>
+
+    <hr style="border: none; height: 2px; width: 100%; background-image: var(--gold-gradient);margin-top: 0;">
+
+    <!-- Connectivity (NO ANIMATION required) -->
+    <section id="connectivity" class="connectWrap">
+      <h2 class="connectTitle">At the Centre of Every Connection</h2>
+
+      <div class="connectGrid">
+        <div class="mapCard">
+          <div class="mapMock">
+          </div>
+        </div>
+
+        <div class="accCol">
+          <div class="accItem active">
+            <button class="accBtn" type="button">
+              <strong>SCHOOLS</strong>
+              <svg class="accChevron" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="rgba(176,122,77,.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="accPanel">
+              <ul class="accList">
+                <li>
+                  <span>Bombay Cambridge International School</span>
+                  <b style="font-weight: 900;">(1 Min)</b>
+                </li>
+                <li>
+                  <span>Divine Child High School & Junior College</span>
+                  <b style="font-weight: 900;">(5 Min)</b>
+                </li>
+                <li>
+                  <span>Holy Family High School & Junior College</span>
+                  <b style="font-weight: 900;">(6 Min)</b>
+                </li>
+                <li>
+                  <span>Bombay Scottish School Powai</span>
+                  <b style="font-weight: 900;">(12 Min)</b>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="accItem">
+            <button class="accBtn" type="button">
+              <strong>CONNECTIVITY HUBS</strong>
+              <svg class="accChevron" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="rgba(176,122,77,.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="accPanel">
+              <p>
+                JB Nagar Metro Station • Gundavali Metro Station • Andheri Railway Station •
+                Western Express Highway • Airport access
+              </p>
+            </div>
+          </div>
+
+          <div class="accItem">
+            <button class="accBtn" type="button">
+              <strong>SHOPPING & RETAIL</strong>
+              <svg class="accChevron" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="rgba(176,122,77,.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="accPanel">
+              <p>
+                Retail stores, daily convenience, lifestyle & essentials within minutes.
+              </p>
+            </div>
+          </div>
+
+          <div class="accItem">
+            <button class="accBtn" type="button">
+              <strong>CORPORATE CORRIDOR</strong>
+              <svg class="accChevron" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="rgba(176,122,77,.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="accPanel">
+              <p>
+                MIDC • Seepz • Andheri-Kurla Road • Kanakia Wall Street
+              </p>
+            </div>
+          </div>
+
+          <div class="accItem" style="border-bottom:none;">
+            <button class="accBtn" type="button">
+              <strong>HOSPITALS</strong>
+              <svg class="accChevron" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="rgba(176,122,77,.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="accPanel">
+              <p>
+                Seven Hills Hospital • Kokilaben Dhirubhai Ambani Hospital • Holy Spirit Hospital
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer id="footer" class="footer">
+    <div class="footerInner">
+  
+      <!-- Row 1 -->
+      <div class="footerTop">
+        <div class="footerLogos">
+          <img src="Frame465.webp" alt="Group Satellite">
+          <img src="Frame8139.webp" alt="Rockford Group">
+        </div>
+  
+        <div class="footerOffice">
+          <h5>Corporate Office</h5>
+          <p>Satellite Developers Pvt. Ltd. 7th Floor, S-14,</p>
+          <p>Solitaire Corporate Park, Andheri Ghatkopar</p>
+          <p>Link Road, Andheri (E), Mumbai 400093</p>
+        </div>
+  
+        <div class="footerSite">
+          <h5>Site Address</h5>
+          <p>Codename JB99, Behind Gokul Regency, Near</p>
+          <p>Sahar Cargo Estate, V.M Shah Marg, J B Nagar,</p>
+          <p>Andheri East, Mumbai, Maharashtra 400099</p>
+        </div>
+      </div>
+  
+      <!-- Row 2 -->
+      <div class="footerBottomRow">
+        <div class="footerMini">
+          <h6>CONTACT US</h6>
+          <a href="tel:+919109108674">+91 910 910 8674</a>
+        </div>
+  
+        <div class="footerMini">
+          <h6>WEBSITE</h6>
+          <a href="#" onclick="return false;">www.group-satellite.com</a>
+        </div>
+  
+        <div class="footerMini">
+          <h6>EMAIL</h6>
+          <a href="mailto:jbinfo@group-satellite.com">jbinfo@group-satellite.com</a>
+        </div>
+  
+        <div class="footerSocial">
+          <a class="soc" href="#" aria-label="LinkedIn">in</a>
+          <a class="soc" href="#" aria-label="Instagram">◎</a>
+          <a class="soc" href="#" aria-label="Facebook">f</a>
+        </div>
+      </div>
+  
+      <div class="footerTinyRow">
+        <span>Disclaimer</span>
+        <span>© <span id="year"></span> — Copyright</span>
+      </div>
+  
+    </div>
+  </footer>  
+
+  <script src="app.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,2369 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JB99 - Assignment</title>
+
+  <!-- Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Elegant serif for headings (close to your design) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- GSAP -->
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+  <style>
+    @font-face {
+      font-family: 'IvyJournal';
+      src: url('IvyJournal-Regular.ttf');
+    }
+    @font-face {
+      font-family: 'IvyJournal-Thin';
+      src: url('IvyJournal-Thin.ttf');
+    }
+    @font-face {
+      font-family: 'IvyJournal-Light';
+      src: url('IvyJournal-Light.ttf');
+    }
+    @font-face {
+      font-family: 'IvyJournal-SemiBold';
+      src: url('IvyJournal-SemiBold.ttf');
+    }
+    :root{
+      --bg: #f7eeea;
+      --panel: #ffffff;
+      --ink: #2a1f1a;
+      --muted: rgba(42,31,26,.70);
+      --line: rgba(42,31,26,.12);
+
+      --gold: #b07a4d;
+      --gold2: #d2b09b;
+
+      --radius-xl: 22px;
+      --radius-lg: 18px;
+      --radius-md: 14px;
+
+      --shadow: 0 14px 44px rgba(0,0,0,.10);
+      --shadow2: 0 10px 28px rgba(0,0,0,.08);
+
+      --maxw: 1040px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    html{ scroll-behavior: smooth; }
+    body{
+      margin:0;
+      font-family:"Poppins", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1200px 520px at 50% 0%, rgba(210,176,155,.18), transparent 55%),
+        radial-gradient(900px 460px at 100% 20%, rgba(176,122,77,.12), transparent 60%),
+        var(--bg);
+      overflow-x:hidden;
+    }
+
+    img{ max-width:100%; display:block; }
+    a{ color:inherit; text-decoration:none; }
+
+    /* MAIN WRAPPER */
+    /* ===========================
+   MAIN GLASS WRAP (Figma look)
+   =========================== */
+.mainGlass{
+  width: min(var(--maxw), 92vw);
+  margin: -90px auto 0;  /* 👈 overlap on hero like Figma */
+  position: relative;
+  z-index: 5;
+}
+
+.mainGlassInner{
+  border-radius: 28px;
+  background: rgba(255,255,255,.55);
+  border: 1px solid rgba(0,0,0,.05);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 18px 60px rgba(0,0,0,.12);
+  overflow: hidden;
+
+  padding: 44px 60px;
+}
+
+/* Mobile padding like Figma */
+@media(max-width:980px){
+  .mainGlassInner{
+    padding: 34px 26px;
+  }
+  .mainGlass{
+    margin-top: -60px;
+  }
+}
+@media(max-width:420px){
+  .mainGlassInner{
+    padding: 28px 16px;
+  }
+}
+
+
+    /* NAV (top overlay like screenshot) */
+    .nav{
+      position: fixed;
+      top:0;
+      left:0;
+      right:0;
+      z-index: 50;
+      padding: 18px 0;
+      background: linear-gradient(180deg, rgba(0,0,0,.40), rgba(0,0,0,0));
+      pointer-events:none;
+    }
+    .navInner{
+      width: min(var(--maxw), 92vw);
+      margin: 0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+    .navBrand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      color:#fff;
+      font-weight:700;
+      letter-spacing:.02em;
+      pointer-events:auto;
+    }
+    .navBrand .dot{
+      width:10px; height:10px;
+      border-radius:999px;
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+    .navMenu{
+      pointer-events:auto;
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      display:grid;
+      place-items:center;
+      border: 1px solid rgba(255,255,255,.25);
+      background: rgba(255,255,255,.08);
+      backdrop-filter: blur(10px);
+      cursor:pointer;
+      transition: transform .2s ease, background .2s ease;
+    }
+    .navMenu:hover{ transform: translateY(-1px); background: rgba(255,255,255,.12); }
+    .burger{
+      width: 16px;
+      height: 10px;
+      position:relative;
+    }
+    .burger span{
+      position:absolute;
+      left:0; right:0;
+      height:2px;
+      background:#fff;
+      border-radius:999px;
+      opacity:.9;
+    }
+    .burger span:nth-child(1){ top:0; }
+    .burger span:nth-child(2){ top:4px; opacity:.75; }
+    .burger span:nth-child(3){ bottom:0; opacity:.9; }
+    .burger, .burger *{
+      pointer-events: none;
+    }
+    
+    /* ===== Drawer ===== */
+    .navDrawer{
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100vh;
+      width: min(360px, 92vw);
+
+      /* IMPORTANT */
+      background: transparent; /* no blur here */
+      border-left: 1px solid rgba(0,0,0,.06);
+      box-shadow: -22px 0 60px rgba(0,0,0,.20);
+
+      transform: translate3d(105%,0,0);
+      transition: transform .26s ease;
+      z-index: 9998;
+
+      display: flex;
+      flex-direction: column;
+
+      isolation: isolate; /* new stacking context */
+      overflow: hidden;
+    }
+
+    .navDrawer::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: rgba(251,247,244,.96);
+
+      /* blur only on pseudo element */
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+
+      z-index: 0;
+      pointer-events: none; /* VERY IMPORTANT */
+    }
+
+    /* keep all real content above */
+    .navDrawer > *{
+      position: relative;
+      z-index: 1;
+    }
+
+    body.navOpen .navDrawer{
+      transform: translate3d(0,0,0);
+    }
+
+
+    .navDrawerTop{
+      position: sticky;
+      top: 0;
+      z-index: 99999;
+      background: rgba(251,247,244,.96);
+      display:flex;
+      align-items:flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 18px 18px 10px;
+      border-bottom: 1px solid rgba(176,122,77,.16);
+    }
+
+
+    .navDrawerBrand{
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .navDrawerTitle{
+      font-family: "Cormorant Garamond", serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: rgba(42,31,26,.9);
+    }
+
+    .navDrawerSub{
+      font-size: 11px;
+      color: rgba(42,31,26,.65);
+      margin-top: 2px;
+    }
+
+    .navClose{
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      z-index: 999999;
+      pointer-events: auto;
+
+      width: 40px;
+      height: 40px;
+      border-radius: 14px;
+      border: 1px solid rgba(176,122,77,.22);
+      background: rgba(255,255,255,.75);
+      cursor: pointer;
+
+      display: grid;
+      place-items: center;
+    }
+
+
+    .navClose:hover{ transform: translateY(-1px); }
+    .navClose:focus-visible{
+      outline: 2px solid rgba(176,122,77,.55);
+      outline-offset: 3px;
+    }
+    .navOverlay{ z-index: 9997; }
+    body.navOpen .navOverlay{
+      pointer-events: auto;
+    }
+
+    .navLinks{
+      padding: 12px 18px;
+      display:flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .navLink{
+      text-decoration: none;
+      padding: 12px 12px;
+      border-radius: 14px;
+      color: rgba(42,31,26,.78);
+      font-size: 13px;
+      transition: background .18s ease, transform .18s ease;
+    }
+
+    .navLink:hover{
+      background: rgba(176,122,77,.10);
+      transform: translateX(2px);
+    }
+
+    .navLink:focus-visible{
+      outline: 2px solid rgba(176,122,77,.55);
+      outline-offset: 3px;
+    }
+
+    .navDrawerBottom{
+      margin-top: auto;
+      padding: 14px 18px 18px;
+      border-top: 1px solid rgba(176,122,77,.16);
+    }
+
+    .navCTA{
+      display:block;
+      text-align:center;
+      padding: 12px 14px;
+      border-radius: 16px;
+      text-decoration: none;
+      color: white;
+      background: rgba(176,122,77,.92);
+      box-shadow: 0 16px 30px rgba(0,0,0,.12);
+      transition: transform .18s ease;
+    }
+
+    .navCTA:hover{ transform: translateY(-1px); }
+
+    .navHint{
+      margin-top: 10px;
+      font-size: 10px;
+      color: rgba(42,31,26,.55);
+    }
+
+    /* ===== Open state ===== */
+    body.navOpen .navOverlay{
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    body.navOpen .navDrawer{
+      transform: translateX(0%);
+    }
+
+    /* Stop background scroll when menu open */
+    body.navOpen{
+      overflow: hidden;
+    }
+
+    /* HERO */
+    .hero{
+      position:relative;
+      height: 520px;
+      border-radius: 0 0 28px 28px;
+      overflow:hidden;
+      margin-bottom: 0;
+    }
+    .heroBg{
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.32)),
+        radial-gradient(#fff7f49c,#8c8c8c65),
+        url("1bhk_living&diningcam11.webp");
+      background-size: cover;
+      background-position: center;
+      transform: scale(1.04);
+    }
+    .heroContent{
+      position:relative;
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      padding: 0 16px;
+    }
+    .heroTitleWrap{
+      color:#fff;
+      max-width: 860px;
+      text-shadow: 0 20px 60px rgba(0,0,0,.35);
+    }
+    .heroKicker{
+      font-size: 18px;
+      letter-spacing: .26em;
+      text-transform: uppercase;
+      opacity:.92;
+      margin-bottom: 6px;
+      font-family: "IvyJournal";
+      color: #603814;
+    }
+    .heroMain{
+      font-family: "Cormorant Garamond", serif;
+      font-size: clamp(44px, 5.2vw, 74px);
+      font-weight: 500;
+      line-height: 1.05;
+      margin:0;
+      color: #e9d7c9;
+    }
+    .heroMain span{
+      display:block;
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(46px, 6vw, 82px);
+      font-weight: 450;
+      letter-spacing: .01em;
+      background: linear-gradient(
+        145deg,
+        var(--gold),
+        var(--gold2),
+        #AF723B,
+        #603814,
+        var(--gold),
+        var(--gold2),
+        #e9d7c9,
+        #603814,
+        #AF723B,
+        #603814,
+        #e9d7c9,
+        var(--gold2),
+        var(--gold),
+        #AF723B,
+        #603814,
+        var(--gold2),
+        var(--gold)
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* SECTION BASE */
+    .section{
+      background: transparent;
+      padding: 0;
+    }
+    .panel{
+      background: transparent;
+      border: 1px solid rgba(0,0,0,.04);
+      backdrop-filter: blur(10px);
+      border-radius: 26px;
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+    }
+    .panelPad{
+      padding: 46px 60px;
+      position:relative;
+    }
+
+    /* Decorative faint pattern like screenshot */
+    .panelPad::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      opacity:.22;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(176,122,77,.18), transparent 55%),
+        radial-gradient(circle at 85% 65%, rgba(210,176,155,.18), transparent 60%);
+      mix-blend-mode: multiply;
+      z-index: 0 !important;
+    }
+    .patternBG{
+      position: absolute !important;
+      inset: 0;
+      pointer-events: none;
+      z-index: 3 !important;
+
+      background:
+        url("Frame8113.webp") no-repeat right -140px top -80px / 520px auto,
+        url("Frame8113.webp") no-repeat left -180px bottom -140px / 520px auto;
+
+      opacity: 1;
+    }
+    .panelPad > *{ position:relative; z-index: 4 !important; }
+
+    .secTitle{
+      font-family: "IvyJournal-Thin";
+      text-align:center;
+      font-size: 34px;
+      font-weight: 500;
+      margin: 0 0 12px;
+      color: #5F350F;
+    }
+    .secDesc{
+      font-family: "Montserrat", sans-serif;
+      font-style: italic;
+      text-align:center;
+      max-width: 740px;
+      margin: 0 auto;
+      font-size: 12px;
+      line-height: 1.9;
+      color: #5F350F;
+      font-weight: 400;
+    }
+
+    /* Hallmarks chips */
+    .chipRow{
+      margin-top: 26px;
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px;
+      justify-content:center;
+    }
+
+    /* chips keep natural pill width */
+    .chip{
+      font-size: 10px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(176,122,77,.22);
+      background: rgba(255,255,255,.58);
+      color: rgba(42,31,26,.75);
+      letter-spacing:.02em;
+      transition: transform .2s ease, box-shadow .2s ease;
+      user-select:none;
+      white-space: nowrap;
+      flex: 0 0 auto; /* no stretching */
+    }
+
+    .chip:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 12px 30px rgba(0,0,0,.08);
+    }
+
+    /* >= Tablet: force 3 chips first row, 2 chips second row */
+    @media (min-width: 768px){
+      .chipRow{
+        justify-content: center; /* keep centered like figma */
+      }
+
+      /* real flex line break after 3rd chip */
+      .chipRow::after{
+        content:"";
+        flex-basis: 100%;
+        width: 0;
+        order: 4; /* pushes break before 4th chip */
+      }
+
+      /* make chips order normal */
+      .chipRow .chip:nth-child(1){ order: 1; }
+      .chipRow .chip:nth-child(2){ order: 2; }
+      .chipRow .chip:nth-child(3){ order: 3; }
+      .chipRow .chip:nth-child(4){ order: 5; }
+      .chipRow .chip:nth-child(5){ order: 6; }
+    }
+
+    /* Hallmarks images row (3) */
+    .hallmarkGrid{
+      margin-top: 22px;
+      display:grid;
+      grid-template-columns: 1fr 1.4fr 1fr;
+      gap: 16px;
+      align-items:end;
+      position:relative;
+    }
+    /* ============================= */
+    /* Hallmarks Slider (prev|active|next peek) */
+    /* ============================= */
+
+    .hallmarksWrap{
+      margin-top: 22px;
+      position: relative;
+    }
+
+    /* ===== Hallmarks slider (video style) ===== */
+    .hallmarksViewport{
+      border-radius: 18px;
+      border: 1px solid rgba(0,0,0,.06);
+      background: rgba(255,255,255,.55);
+      box-shadow: 0 18px 50px rgba(0,0,0,.10);
+      padding: 18px;
+    }
+
+    .hallmarksMask{
+      overflow: hidden;
+      border-radius: 18px;
+      width: 100%;
+      height: 350px;
+    }
+
+    /* Track is horizontal */
+    .hallmarksTrack{
+      padding-top: 15px;
+      display: flex;
+      gap: 22px;
+      align-items: center;
+      will-change: transform;
+    }
+
+    /* Each item is ONE image */
+    .hallmarksItem{
+      flex: 0 0 62%;
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      opacity: .55;
+      transform: scale(.95);
+      transition: opacity .25s ease, transform .25s ease;
+    }
+
+    /* Active highlight */
+    .hallmarksItem.isActive{
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    /* Zig-zag effect (alternate up/down like video) */
+    .hallmarksItem:nth-child(odd){
+      transform: translateY(-10px) scale(.95);
+    }
+    .hallmarksItem:nth-child(even){
+      transform: translateY(10px) scale(.95);
+    }
+
+    .hallmarksItem.isActive:nth-child(odd){
+      transform: translateY(-10px) scale(1);
+    }
+    .hallmarksItem.isActive:nth-child(even){
+      transform: translateY(10px) scale(1);
+    }
+
+    /* Image style */
+    .hallmarksItem img{
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      display: block;
+      border-radius: 18px;
+      border: 1px solid rgba(0,0,0,.05);
+      box-shadow: 0 10px 24px rgba(0,0,0,.08);
+    }
+
+    /* Make peeking more visible on large screens */
+    @media (min-width: 900px){
+      .hallmarksItem{
+        flex-basis: 54%;
+      }
+      .hallmarksItem img{
+        height: 300px;
+      }
+    }
+
+
+    /* Horizontal line + knob */
+    .hallmarksBar{
+      position: relative;
+      margin-top: 18px;
+      height: 26px;
+      display: flex;
+      align-items: center;
+    }
+
+    .hallmarksBarLine{
+      width: 100%;
+      height: 2px;
+      background: rgba(176,122,77,.55);
+      border-radius: 999px;
+    }
+
+    .hallmarksBarKnob{
+      position: absolute;
+      left: 6%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,.06);
+      background: linear-gradient(135deg, rgba(176,122,77,.25), rgba(210,176,155,.25));
+      box-shadow: 0 18px 44px rgba(0,0,0,.14);
+      display: grid;
+      place-items: center;
+      cursor: grab;
+      transition: transform .18s ease;
+    }
+
+    .hallmarksBarKnob:active{
+      cursor: grabbing;
+    }
+
+    .hallmarksBarKnob:hover{
+      transform: translate(-50%,-55%);
+    }
+
+    /* Pin wrappers */
+    .hallmarksPinWrap{
+      position: relative;
+      width: 100%;
+    }
+
+    #hallmarksSection{
+      width: 100%;
+      position: relative;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #hallmarksSection.is-pinned{
+      top: -45% !important;
+    }
+
+    .hCard{
+      border-radius: 18px;
+      overflow:hidden;
+      border: 1px solid rgba(0,0,0,.06);
+      box-shadow: 0 18px 50px rgba(0,0,0,.10);
+      background:#fff;
+      transform: translateZ(0);
+    }
+    .hCard img{
+      width:100%;
+      height: 170px;
+      object-fit: cover;
+      display:block;
+    }
+    .hCard.big img{ height: 220px; }
+
+    /* circular arrow button like screenshot */
+    .arrowBtn{
+      position:absolute;
+      left: -6px;
+      bottom: -10px;
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,.06);
+      background: linear-gradient(135deg, rgba(176,122,77,.22), rgba(210,176,155,.22));
+      box-shadow: 0 18px 44px rgba(0,0,0,.12);
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+      transition: transform .2s ease;
+    }
+    .arrowBtn:hover{ transform: translateY(-2px); }
+    .arrowBtn svg{ width:18px; height:18px; opacity:.85; }
+
+    /* Configurations */
+    .configGrid{
+      margin-top: 22px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+    .configBox{
+      border-radius: 22px;
+      overflow:hidden;
+      position:relative;
+      height: 260px;
+      background:#fff;
+      border: 1px solid rgba(0,0,0,.06);
+      box-shadow: 0 18px 44px rgba(0,0,0,.10);
+    }
+    .configBox img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      filter: blur(3px);
+      transform: scale(1.05);
+      opacity:.85;
+    }
+    .configLabelRow{
+      display:flex;
+      justify-content:space-between;
+      margin-top: 10px;
+      padding: 0 8px;
+      color: rgba(176,122,77,.85);
+      font-size: 12px;
+      letter-spacing:.02em;
+    }
+    .drop{
+      display:flex;
+      align-items:center;
+      gap: 6px;
+      padding: 10px 10px;
+      border-bottom: 1px solid rgba(176,122,77,.20);
+      min-width: 110px;
+      justify-content:center;
+    }
+    .drop svg{ width: 12px; height: 12px; opacity:.8; }
+    .configSelect{
+      appearance:none;
+      -webkit-appearance:none;
+      -moz-appearance:none;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid rgba(176,122,77,.22);
+      padding: 10px 10px;
+      font-size: 12px;
+      color: rgba(176,122,77,.90);
+      font-family: "Montserrat", sans-serif;
+      font-style: italic;
+      cursor:pointer;
+      min-width: 120px;
+      text-align:center;
+    }
+    .selectWrapper {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .selectWrapper svg {
+      width: 12px;
+      height: 12px;
+      pointer-events: none;
+      flex-shrink: 0;
+    }
+
+    /* Legacy grid 2x2 with overlays */
+    .legacyGrid{
+      margin-top: 18px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
+    }
+    .legacyTile{
+      position:relative;
+      height: 170px;
+      border-radius: 18px;
+      overflow:hidden;
+      border: 1px solid rgba(0,0,0,.06);
+      box-shadow: 0 18px 44px rgba(0,0,0,.10);
+      background:#111;
+    }
+    .legacyTile img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+      filter: saturate(1.05);
+      transform: scale(1.02);
+    }
+    .legacyTile::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.55));
+    }
+    .legacyText{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      padding: 14px;
+      text-align:center;
+      z-index:2;
+      color:#fff;
+    }
+    .legacyText h4{
+      margin:0;
+      font-family:"Cormorant Garamond", serif;
+      font-weight: 500;
+      font-size: 20px;
+      letter-spacing:.01em;
+    }
+    .legacyText p{
+      margin: 8px 0 0;
+      max-width: 280px;
+      font-size: 10px;
+      line-height: 1.55;
+      opacity:.86;
+    }
+    .legacyText h4:only-child {
+      margin-bottom: 12px;
+    }
+    .legacySliderWrap{
+      margin-top: 18px;
+      position:relative;
+    }
+    .legacyViewport{
+      overflow:hidden;
+      border-radius: 18px;
+    }
+    .legacyTrack{
+      display:flex;
+      width:100%;
+      transition: transform .5s ease;
+    }
+    .legacyTrack .legacyGrid{
+      flex: 0 0 100%;
+    }
+
+    .legacyNav{
+      display:flex;
+      justify-content:center;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .legacyBtn{
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(0,0,0,.06);
+      background: linear-gradient(135deg, rgba(176,122,77,.18), rgba(210,176,155,.22));
+      box-shadow: 0 18px 44px rgba(0,0,0,.12);
+      cursor:pointer;
+      font-size: 22px;
+      color: rgba(42,31,26,.75);
+    }
+    .legacyBtn:hover{ transform: translateY(-1px); }
+    .enquire-btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: linear-gradient(180deg, #c58a4a 0%, #9a5e2a 100%);
+      color: #ffffff;
+      font-family: "Georgia", "Times New Roman", serif;
+      font-size: 10px;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.3),
+        0 4px 10px rgba(0, 0, 0, 0.25);
+      transition: 
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+    }
+
+    .enquire-btn:hover {
+      background: linear-gradient(180deg, #d79b5a 0%, #b06a33 100%);
+      transform: translateY(-2px);
+      box-shadow: 
+        inset 0 1px 0 rgba(255, 255, 255, 0.35),
+        0 6px 14px rgba(0, 0, 0, 0.3);
+    }
+
+    .enquire-btn:active {
+      transform: translateY(0);
+      box-shadow: 
+        inset 0 2px 6px rgba(0, 0, 0, 0.35);
+    }
+
+    /* Brand split section */
+    .brandSplit{
+      margin-top: 30px;
+      display:grid;
+      grid-template-columns: 1fr 1px 1fr;
+      gap: 0;
+      align-items:stretch;
+    }
+    .divider{
+      background: rgba(176,122,77,.22);
+      width:1px;
+    }
+    .brandCard{
+      padding: 24px 18px 10px;
+      text-align:center;
+    }
+    .brandLogoRow{
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      align-items:center;
+      margin-bottom: 10px;
+    }
+    .brandMark{
+      width: 68px;
+      height: 68px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(176,122,77,.22), rgba(210,176,155,.22));
+      border: 1px solid rgba(0,0,0,.05);
+      box-shadow: 0 16px 36px rgba(0,0,0,.10);
+      display: flex;
+      align-items: center; /* vertical */
+      justify-content: center; /* optional horizontal */
+      padding: 5px;
+    }
+    .brandName{
+      font-weight:700;
+      letter-spacing:.08em;
+      font-size: 11px;
+      text-transform: uppercase;
+      color: rgba(42,31,26,.78);
+    }
+    .brandCard h3{
+      margin: 12px 0 10px;
+      font-family: "IvyJournal-Light";
+      font-weight: 500;
+      font-size: 20px;
+      color: rgba(176,122,77,.92);
+    }
+    .brandCard p{
+      margin:0 auto;
+      max-width: 340px;
+      font-size: 10.5px;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    /* Connectivity section (NO animation requirement) */
+    .connectWrap{
+      margin-top: 34px;
+    }
+    .connectTitle{
+      font-family: "IvyJournal-Thin";
+      text-align:center;
+      font-size: 24px;
+      font-weight: 500;
+      margin: 0 0 18px;
+      background: linear-gradient(
+        145deg,
+        var(--gold2),
+        var(--gold),
+        var(--gold2),
+        #AF723B,
+        #603814,
+        var(--gold2),
+        #603814,
+        #AF723B,
+        #603814,
+        var(--gold2),
+        #AF723B,
+        #603814,
+        var(--gold2),
+        var(--gold),
+        var(--gold2)
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .connectGrid{
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 22px;
+      align-items:start;
+    }
+    .mapCard{
+      border-radius: 18px;
+      background: rgba(255,255,255,.55);
+      border: 1px solid rgba(0,0,0,.05);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+      padding: 14px;
+    }
+    .mapMock{
+      border-radius: 16px;
+      border: 1px dashed rgba(176,122,77,.35);
+      height: 300px;
+      position:relative;
+      background:
+        radial-gradient(400px 240px at 30% 30%, rgba(210,176,155,.18), transparent 60%),
+        radial-gradient(380px 220px at 80% 60%, rgba(176,122,77,.10), transparent 60%),
+        url('map.webp'),
+        #fbf7f4;
+        background-repeat: no-repeat, no-repeat, no-repeat, no-repeat;
+        background-size: auto, auto, contain, auto;
+        background-position: center;
+    }
+
+    .accCol{
+      border-radius: 18px;
+      background: rgba(255,255,255,.55);
+      border: 1px solid rgba(0,0,0,.05);
+      box-shadow: var(--shadow2);
+      overflow:hidden;
+    }
+    .accItem{
+      border-bottom: 1px solid rgba(176,122,77,.18);
+    }
+    .accBtn{
+      width:100%;
+      border:0;
+      background: transparent;
+      padding: 14px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      cursor:pointer;
+      font-family: inherit;
+      color: rgba(176,122,77,.90);
+      font-size: 12px;
+      letter-spacing:.02em;
+    }
+    .accBtn strong{
+      font-weight: 500;
+      background: linear-gradient(
+        145deg,
+        var(--gold),
+        var(--gold2),
+        #AF723B,
+        var(--gold),
+        var(--gold2),
+        #AF723B,
+        var(--gold2),
+        var(--gold),
+        #AF723B,
+        var(--gold2),
+        var(--gold)
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      font-weight: 600;
+      color: transparent;
+      font-family: "IvyJournal-Thin";
+    }
+    .accChevron{
+      width: 18px;
+      height: 18px;
+      opacity:.75;
+      transition: transform .22s ease;
+    }
+    .accPanel{
+      max-height: 0px;
+      overflow:hidden;
+      transition: max-height .32s ease;
+      padding: 0 14px;
+    }
+    .accPanel p{
+      margin: 0;
+      padding: 0 0 14px;
+      font-size: 11px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+    .accItem.active strong{
+      font-family: "IvyJournal-SemiBold";
+    }
+    .accItem.active .accChevron{
+      transform: rotate(180deg);
+    }
+    .accItem.active .accPanel{
+      max-height: 160px;
+    }
+    
+    /* list inside accordion */
+    .accList{
+      list-style: none;
+      margin: 0;
+      padding: 0 0 14px;
+    }
+
+    .accList li{
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 14px;
+      padding: 4px 0;
+      font-size: 11px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+
+    .accList li span{
+      flex: 1;
+    }
+
+    .accList li b{
+      font-weight: 500;
+      color: rgba(42,31,26,.75);
+      white-space: nowrap;
+    }
+
+
+    /* FOOTER (original layout) */
+    .footer{
+      margin-top: 22px;
+      background: #F0F2F4;
+      border-top: 1px solid rgba(0,0,0,.05);
+      padding: 18px 0 18px;
+    }
+
+    .footerInner{
+      width: min(var(--maxw), 92vw);
+      margin: 0 auto;
+    }
+
+    .footerTop{
+      display:grid;
+      grid-template-columns: 220px 1fr 1fr;
+      gap: 26px;
+      align-items:start;
+    }
+
+    .footerLogos{
+      display:flex;
+      flex-direction:column;
+      gap: 18px;
+    }
+    .footerLogos img{
+      width: 150px;
+      max-width: 100%;
+    }
+
+    .footerOffice h5,
+    .footerSite h5{
+      margin: 0 0 10px;
+      font-size: 13px;
+      font-family: "IvyJournal-SemiBold";
+      background: linear-gradient(
+        145deg,
+        var(--gold),
+        var(--gold2),
+        #AF723B,
+        var(--gold),
+        var(--gold2),
+        #e9d7c9,
+        #AF723B,
+        #e9d7c9,
+        var(--gold2),
+        var(--gold),
+        #AF723B,
+        var(--gold2),
+        var(--gold)
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      font-weight: 600;
+      color: transparent;
+    }
+    .footerOffice p,
+    .footerSite p{
+      margin:0;
+      font-size: 10px;
+      line-height: 1.7;
+      color: rgba(42,31,26,.72);
+    }
+
+    .footerBottomRow{
+      margin-top: 20px;
+      display:grid;
+      grid-template-columns: 1fr 1fr 1fr auto;
+      gap: 18px;
+      align-items:center;
+    }
+
+    .footerMini h6{
+      margin:0 0 6px;
+      font-size: 9px;
+      letter-spacing:.12em;
+      text-transform: uppercase;
+      font-family: "IvyJournal-SemiBold";
+      background: linear-gradient(
+        145deg,
+        var(--gold),
+        var(--gold2),
+        #AF723B,
+        var(--gold),
+        var(--gold2),
+        #e9d7c9,
+        #AF723B,
+        #e9d7c9,
+        var(--gold2),
+        var(--gold),
+        #AF723B,
+        var(--gold2),
+        var(--gold)
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      font-weight: 600;
+      color: transparent;
+    }
+    .footerMini a{
+      font-size: 10px;
+      color: rgba(42,31,26,.75);
+    }
+
+    .footerSocial{
+      display:flex;
+      justify-content:flex-end;
+      gap: 10px;
+    }
+
+    .footerSocial .soc{
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      display:grid;
+      place-items:center;
+      font-size: 11px;
+      font-weight: 700;
+      border: 1px solid rgba(176,122,77,.25);
+      color: rgba(176,122,77,.90);
+      background: rgba(255,255,255,.8);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .footerSocial .soc:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 14px 30px rgba(0,0,0,.12);
+    }
+
+    .footerTinyRow{
+      margin-top: 14px;
+      display:flex;
+      justify-content:space-between;
+      font-size: 9px;
+      color: rgba(42,31,26,.45);
+    }
+
+    /* Responsive footer */
+    @media(max-width:980px){
+      .footerTop{
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .footerBottomRow{
+        grid-template-columns: 1fr;
+        gap: 12px;
+        align-items:start;
+      }
+      .footerSocial{
+        justify-content:flex-start;
+      }
+      .footerTinyRow{
+        flex-direction:column;
+        gap: 6px;
+      }
+    }
+
+    .fBlock p, .fBlock a{
+      margin:0;
+      line-height: 1.7;
+      display:block;
+      color: rgba(42,31,26,.70);
+    }
+    .fBottom{
+      text-align:center;
+      margin-top: 16px;
+      font-size: 10px;
+      opacity:.65;
+    }
+
+    /* ANIMATION CLASSES */
+    .reveal{
+      opacity:0;
+      transform: translateY(18px);
+    }
+    .revealScale{
+      opacity:0;
+      transform: translateY(18px) scale(.98);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 980px){
+      .panelPad{ padding: 38px 28px; }
+      .hero{ height: 460px; }
+      .hallmarkGrid{
+        grid-template-columns: 1fr;
+      }
+      .hCard.big img{ height: 200px; }
+      .hCard img{ height: 190px; }
+      .arrowBtn{ left: 10px; bottom: -14px; }
+      .configGrid{ grid-template-columns: 1fr; }
+      .connectGrid{ grid-template-columns: 1fr; }
+      .footerInner{ grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 420px){
+      .panelPad{ padding: 30px 18px; }
+      .secTitle{ font-size: 28px; }
+      .hero{ height: 420px; }
+      .heroMain{ font-size: 44px; }
+      .heroMain span{ font-size: 52px; }
+      .legacyGrid{ grid-template-columns: 1fr; }
+      .brandSplit{ grid-template-columns: 1fr; }
+      .divider{ display:none; }
+    }
+    .socialRow{
+      display:flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .socialIcon{
+      width: 30px;
+      height: 30px;
+      border-radius: 999px;
+      display:grid;
+      place-items:center;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing:.06em;
+      border: 1px solid rgba(176,122,77,.22);
+      background: #fff;
+      color: rgba(176,122,77,.90);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .socialIcon:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 16px 36px rgba(0,0,0,.12);
+    }
+
+
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <div class="nav" role="banner">
+    <div class="navInner">
+      <a class="navBrand" href="#top" aria-label="Codename JB99 Home">
+        <span class="dot" aria-hidden="true"></span>
+        <img style="width:60px" src="logobrand.webp" alt="Codename JB99">
+      </a>
+  
+      <button class="navMenu" type="button"
+        aria-label="Open menu"
+        aria-controls="mobileNav"
+        aria-expanded="false">
+        <span class="burger" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </span>
+      </button>
+    </div>
+  </div>
+  
+  <!-- Overlay -->
+  <div class="navOverlay" data-nav-close tabindex="-1" aria-hidden="true"></div>
+  
+  <!-- Slide-in Drawer -->
+  <aside class="navDrawer" id="mobileNav" aria-label="Site Navigation" aria-hidden="true">
+    <div class="navDrawerTop">
+      <div class="navDrawerBrand">
+        <img src="logobrand.webp" alt="Codename JB99" width="54" height="54">
+        <div>
+          <div class="navDrawerTitle">Codename JB99</div>
+          <div class="navDrawerSub">Where every generation feels at home</div>
+        </div>
+      </div>
+  
+      <button class="navClose" type="button" aria-label="Close menu" data-nav-close>
+        <span aria-hidden="true">✕</span>
+      </button>
+    </div>
+  
+    <nav class="navLinks" role="navigation">
+      <a href="#hallmarksPinWrap" class="navLink">Overview</a>
+      <a href="#hallmarks1" class="navLink">Hallmarks</a>
+      <a href="#configurations" class="navLink">Configurations</a>
+      <a href="#legacy" class="navLink">Legacy</a>
+      <a href="#connectivity" class="navLink">Connectivity</a>
+      <a href="#footer" class="navLink">Contact</a>
+    </nav>
+  
+    <div class="navDrawerBottom">
+      <a class="navCTA" href="#footer">Enquire Now</a>
+      <div class="navHint">Tip: Swipe right-to-left to close (Works in mobile)</div>
+    </div>
+  </aside>
+  
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="heroBg" id="heroBg"></div>
+    <div class="heroContent">
+      <div class="heroTitleWrap">
+        <div class="heroKicker reveal" id="heroKicker">WHERE EVERY GENERATION</div>
+        <h1 class="heroMain" id="heroTitle">
+          <span class="reveal">Feels at Home.</span>
+        </h1>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+
+    <!-- Overview + Hallmarks -->
+    <section class="section hallmarksPinWrap" style="margin-top:-70px;" id="hallmarksPinWrap">
+      <div class="panel" id="hallmarksSection">    
+        <div class="panelPad"><div class="patternBG"></div>
+
+          <br><br>
+
+          <h2 class="secTitle reveal">An Overview of Project</h2>
+          <p class="secDesc reveal">
+            A modern residential address in JB Nagar designed for every generation.
+            Smart layouts, curated amenities, and unmatched connectivity come together
+            to elevate everyday living at the heart of Andheri East.
+          </p>
+
+          <br><br><br><br>
+
+          <hr style="border: none; height: 1.5px; width: 100%; background-image: linear-gradient(145deg, var(--gold), var(--gold2), #AF723B, #603814, var(--gold), var(--gold2), #e9d7c9, #603814, #AF723B, #603814, #e9d7c9, var(--gold2), var(--gold), #AF723B, #603814, var(--gold2),var(--gold));">
+
+          <br><br><br><br>
+
+          <h3 id="hallmarks1" class="secTitle reveal" style="font-size:26px; margin-top:30px;">
+            Hallmarks of Codename JB99
+          </h3>
+
+          <div class="chipRow reveal">
+            <span class="chip">Supersized 1 and 2 BHK residences</span>
+            <span class="chip">Secure, Gated Community</span>
+            <span class="chip">Rooftop Amenities for Every Mood</span>
+            <span class="chip">Purposefully Planned for Better Living</span>
+            <span class="chip">JB Nagar’s Most Connected Location</span>
+          </div>
+
+          <!-- Hallmarks Slider -->
+          <div class="hallmarksWrap" style="margin-top:22px;">
+            <div class="hallmarksViewport revealScale" id="hallmarksViewport">
+              <div class="hallmarksMask" id="hallmarksMask">
+                <div class="hallmarksTrack" id="hallmarksTrack">
+
+                  <!-- Slide 1 (4 images) -->
+                  <div class="hallmarksItem"><img src="rectangle62.webp" alt=""></div>
+                  <div class="hallmarksItem"><img src="rectangle63.webp" alt=""></div>
+                  <div class="hallmarksItem"><img src="rectangle64.webp" alt=""></div>
+                  <div class="hallmarksItem"><img src="rectangle62 (1).webp" alt=""></div>
+
+                  <div class="hallmarksItem"><img src="rectangle64 (1).webp" alt=""></div>
+                  <div class="hallmarksItem"><img src="rectangle62.webp" alt=""></div>
+                  <div class="hallmarksItem"><img src="rectangle63.webp" alt=""></div>
+                  <div class="hallmarksItem"><img src="rectangle64.webp" alt=""></div>
+
+                  <div class="hallmarksItem"><img src="rectangle62 (1).webp" alt=""></div>
+                  <div class="hallmarksItem"><img src="rectangle64 (1).webp" alt=""></div>
+                  <div class="hallmarksItem"><img src="rectangle62.webp" alt=""></div>
+                  <div class="hallmarksItem"><img src="rectangle63.webp" alt=""></div>
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Horizontal slider line + knob -->
+            <div class="hallmarksBar revealScale" id="hallmarksBar">
+              <div class="hallmarksBarLine"></div>
+              <button class="hallmarksBarKnob" id="hallmarksKnob" aria-label="Drag slider">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                  <path d="M10 8l4 4-4 4" stroke="rgba(255,255,255,.95)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Configurations -->
+    <section id="configurations" class="section" style="margin-top: 22px;">
+      <div class="panel">
+        <div class="panelPad">
+
+          <h2 class="secTitle reveal">Configurations</h2>
+
+          <div class="configGrid">
+            <div>
+              <div class="configBox revealScale">
+                <img id="cfg1" src="rectangle62 (1).webp" alt="1BHK">
+              </div>
+              <div class="configLabelRow reveal">
+                <div class="selectWrapper">
+                  <select class="configSelect" data-target="cfg1">
+                    <option value="classic" selected>Classic</option>
+                    <option value="premium">Premium</option>
+                  </select>
+                  <svg style="height: 10px;" viewBox="0 0 24 24" fill="none">
+                    <path d="M6 9l6 6 6-6" stroke="rgba(176,122,77,.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>   
+                </div>             
+                <div style="opacity:.0">.</div>
+              </div>
+            </div>
+
+            <div>
+              <div class="configBox revealScale">
+                <img id="cfg2" src="rectangle64 (1).webp" alt="2BHK">
+              </div>
+              <div class="configLabelRow reveal" style="justify-content:flex-end;">
+                <div class="selectWrapper">
+                  <select class="configSelect" data-target="cfg2">
+                    <option value="classic" selected>Classic</option>
+                    <option value="premium">Premium</option>
+                  </select>
+                  <svg style="height: 10px;" viewBox="0 0 24 24" fill="none">
+                    <path d="M6 9l6 6 6-6" stroke="rgba(176,122,77,.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </div>                
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Legacy -->
+    <section id="legacy" class="section" style="margin-top: 22px;">
+      <div class="panel">
+        <div class="panelPad"><div class="patternBG"></div>
+
+          <h2 class="secTitle reveal">The Legacy Behind the landmark</h2>
+
+          <div class="legacySliderWrap">
+            <div class="legacyViewport">
+              <div class="legacyTrack" id="legacyTrack">
+          
+                <div class="legacyGrid legacyGrid1">
+                  <div class="legacyTile revealScale">
+                    <img src="gym1part.webp" alt="Gym">
+                    <div class="legacyText">
+                      <h4>Gymnasium</h4>
+                      <p>
+                        A fully equipped, modern gymnasium designed to support fitness, strength and wellness,
+                        helping residents stay active every day.
+                      </p>
+                      <a href="#" class="enquire-btn">Enquire Now</a>
+                    </div>
+                  </div>
+      
+                  <div class="legacyTile revealScale">
+                    <img src="gym2part.webp" alt="Walking Track">
+                    <div class="legacyText">
+                      <h4>Walking Track</h4>
+                    </div>
+                  </div>
+      
+                  <div class="legacyTile revealScale">
+                    <img src="gym3part.webp" alt="Rooftop Pool">
+                    <div class="legacyText">
+                      <h4>Rooftop Pool</h4>
+                    </div>
+                  </div>
+      
+                  <div class="legacyTile revealScale">
+                    <img src="gym4part.webp" alt="Landscape Garden">
+                    <div class="legacyText">
+                      <h4>Landscape Garden</h4>
+                    </div>
+                  </div>
+                </div>
+          
+                <div class="legacyGrid legacyGrid2">
+                  <div class="legacyTile revealScale">
+                    <img src="track1.webp" alt="Gym">
+                    <div class="legacyText">
+                      <h4>Gymnasium</h4>
+                    </div>
+                  </div>
+      
+                  <div class="legacyTile revealScale">
+                    <img src="track3.webp" alt="Walking Track">
+                    <div class="legacyText">
+                      <h4>Walking Track</h4>
+                      <p>
+                        A dedicated walking track that encourages a healthy lifestyle while connecting you with nature.
+                        Start your day with fresh air and rejuvenating steps.
+                      </p>
+                      <a href="#" class="enquire-btn">Enquire Now</a>
+                    </div>
+                  </div>
+      
+                  <div class="legacyTile revealScale">
+                    <img src="track2.webp" alt="Rooftop Pool">
+                    <div class="legacyText">
+                      <h4>Rooftop Pool</h4>
+                    </div>
+                  </div>
+      
+                  <div class="legacyTile revealScale">
+                    <img src="track4.webp" alt="Landscape Garden">
+                    <div class="legacyText">
+                      <h4>Landscape Garden</h4>
+                    </div>
+                  </div>
+                </div>
+          
+                <div class="legacyGrid legacyGrid3">
+                  <div class="legacyTile revealScale">
+                    <img src="swim1.webp" alt="Gym">
+                    <div class="legacyText">
+                      <h4>Gymnasium</h4>
+                    </div>
+                  </div>
+      
+                  <div class="legacyTile revealScale">
+                    <img src="swim3.webp" alt="Walking Track">
+                    <div class="legacyText">
+                      <h4>Walking Track</h4>
+                    </div>
+                  </div>
+      
+                  <div class="legacyTile revealScale">
+                    <img src="swim2.webp" alt="Rooftop Pool">
+                    <div class="legacyText">
+                      <h4>Rooftop Pool</h4>
+                      <p>
+                        Experience bliss in a serene rooftop with spectacular city views.
+                        A perfect blend of luxury and leisure.
+                      </p>
+                      <a href="#" class="enquire-btn">Enquire Now</a>
+                    </div>
+                  </div>
+      
+                  <div class="legacyTile revealScale">
+                    <img src="swim4.webp" alt="Landscape Garden">
+                    <div class="legacyText">
+                      <h4>Landscape Garden</h4>
+                    </div>
+                  </div>
+                </div>
+          
+                <div class="legacyGrid legacyGrid4">
+                  <div class="legacyTile revealScale">
+                    <img src="garden1.webp" alt="Gym">
+                    <div class="legacyText">
+                      <h4>Gymnasium</h4>
+                    </div>
+                  </div>
+      
+                  <div class="legacyTile revealScale">
+                    <img src="garden3.webp" alt="Walking Track">
+                    <div class="legacyText">
+                      <h4>Walking Track</h4>
+                    </div>
+                  </div>
+      
+                  <div class="legacyTile revealScale">
+                    <img src="garden2.webp" alt="Rooftop Pool">
+                    <div class="legacyText">
+                      <h4>Rooftop Pool</h4>
+                    </div>
+                  </div>
+      
+                  <div class="legacyTile revealScale">
+                    <img src="garden4.webp" alt="Landscape Garden">
+                    <div class="legacyText">
+                      <h4>Landscape Garden</h4>
+                      <p>
+                        A beautifully crafted landscape garden that brings nature closer to you everyday.
+                        Relax, Recharge and enjoy the serenity of fresh greenery.
+                      </p>
+                      <a href="#" class="enquire-btn">Enquire Now</a>
+                    </div>
+                  </div>
+                </div>
+          
+              </div><br>
+            </div>
+          
+            <div class="legacyNav">
+              <button class="legacyBtn" id="legacyPrev">‹</button>
+              <button class="legacyBtn" id="legacyNext">›</button>
+            </div>
+          </div>          
+
+          <div class="brandSplit reveal" style="margin-top:26px;">
+            <div class="brandCard">
+              <div class="brandLogoRow">
+                <div class="brandMark"><img src="Frame465.webp" style="width: 100%;"></div>
+                <div class="brandName">GROUP SATELLITE</div>
+              </div>
+              <h3>Proudly Contributing to<br/>Andheri East's Story</h3>
+              <p style='font-family: "Montserrat", sans-serif;font-style: italic;'>
+                With decades of excellence, Group Satellite has shaped Andheri East with iconic commercial and
+                residential landmarks. Codename JB99 continues this trusted legacy of innovation and impact.
+              </p>
+            </div>
+
+            <div class="divider"></div>
+
+            <div class="brandCard">
+              <div class="brandLogoRow">
+                <div class="brandMark"><img src="Frame8139.webp" style="width: 100%;"></div>
+                <div class="brandName">ROCKFORD GROUP</div>
+              </div>
+              <h3>Building Trust.<br/>Shaping Futures.</h3>
+              <p style='font-family: "Montserrat", sans-serif;font-style: italic;'>
+                Built on trust and transparency, Rockford has crafted landmark addresses across Mumbai.
+                With design excellence and true customer focus, we create spaces that elevate every day.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Connectivity (NO ANIMATION required) -->
+    <section id="connectivity" class="connectWrap">
+      <h2 class="connectTitle">At the Centre of Every Connection</h2>
+
+      <div class="connectGrid">
+        <div class="mapCard">
+          <div class="mapMock">
+          </div>
+        </div>
+
+        <div class="accCol">
+          <div class="accItem active">
+            <button class="accBtn" type="button">
+              <strong>SCHOOLS</strong>
+              <svg class="accChevron" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="rgba(176,122,77,.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="accPanel">
+              <ul class="accList">
+                <li>
+                  <span>Bombay Cambridge International School</span>
+                  <b>(1 Min)</b>
+                </li>
+                <li>
+                  <span>Divine Child High School & Junior College</span>
+                  <b>(5 Min)</b>
+                </li>
+                <li>
+                  <span>Holy Family High School & Junior College</span>
+                  <b>(6 Min)</b>
+                </li>
+                <li>
+                  <span>Bombay Scottish School Powai</span>
+                  <b>(12 Min)</b>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="accItem">
+            <button class="accBtn" type="button">
+              <strong>CONNECTIVITY HUBS</strong>
+              <svg class="accChevron" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="rgba(176,122,77,.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="accPanel">
+              <p>
+                JB Nagar Metro Station • Gundavali Metro Station • Andheri Railway Station •
+                Western Express Highway • Airport access
+              </p>
+            </div>
+          </div>
+
+          <div class="accItem">
+            <button class="accBtn" type="button">
+              <strong>SHOPPING & RETAIL</strong>
+              <svg class="accChevron" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="rgba(176,122,77,.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="accPanel">
+              <p>
+                Retail stores, daily convenience, lifestyle & essentials within minutes.
+              </p>
+            </div>
+          </div>
+
+          <div class="accItem">
+            <button class="accBtn" type="button">
+              <strong>CORPORATE CORRIDOR</strong>
+              <svg class="accChevron" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="rgba(176,122,77,.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="accPanel">
+              <p>
+                MIDC • Seepz • Andheri-Kurla Road • Kanakia Wall Street
+              </p>
+            </div>
+          </div>
+
+          <div class="accItem" style="border-bottom:none;">
+            <button class="accBtn" type="button">
+              <strong>HOSPITALS</strong>
+              <svg class="accChevron" viewBox="0 0 24 24" fill="none">
+                <path d="M6 9l6 6 6-6" stroke="rgba(176,122,77,.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            <div class="accPanel">
+              <p>
+                Seven Hills Hospital • Kokilaben Dhirubhai Ambani Hospital • Holy Spirit Hospital
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer id="footer" class="footer">
+    <div class="footerInner">
+  
+      <!-- Row 1 -->
+      <div class="footerTop">
+        <div class="footerLogos">
+          <img src="Frame465.webp" alt="Group Satellite">
+          <img src="Frame8139.webp" alt="Rockford Group">
+        </div>
+  
+        <div class="footerOffice">
+          <h5>Corporate Office</h5>
+          <p>Satellite Developers Pvt. Ltd. 7th Floor, S-14,</p>
+          <p>Solitaire Corporate Park, Andheri Ghatkopar</p>
+          <p>Link Road, Andheri (E), Mumbai 400093</p>
+        </div>
+  
+        <div class="footerSite">
+          <h5>Site Address</h5>
+          <p>Codename JB99, Behind Gokul Regency, Near</p>
+          <p>Sahar Cargo Estate, V.M Shah Marg, J B Nagar,</p>
+          <p>Andheri East, Mumbai, Maharashtra 400099</p>
+        </div>
+      </div>
+  
+      <!-- Row 2 -->
+      <div class="footerBottomRow">
+        <div class="footerMini">
+          <h6>CONTACT US</h6>
+          <a href="tel:+919109108674">+91 910 910 8674</a>
+        </div>
+  
+        <div class="footerMini">
+          <h6>WEBSITE</h6>
+          <a href="#" onclick="return false;">www.group-satellite.com</a>
+        </div>
+  
+        <div class="footerMini">
+          <h6>EMAIL</h6>
+          <a href="mailto:jbinfo@group-satellite.com">jbinfo@group-satellite.com</a>
+        </div>
+  
+        <div class="footerSocial">
+          <a class="soc" href="#" aria-label="LinkedIn">in</a>
+          <a class="soc" href="#" aria-label="Instagram">◎</a>
+          <a class="soc" href="#" aria-label="Facebook">f</a>
+        </div>
+      </div>
+  
+      <div class="footerTinyRow">
+        <span>Disclaimer</span>
+        <span>© <span id="year"></span> — Copyright</span>
+      </div>
+  
+    </div>
+  </footer>  
+
+  <script>
+    // year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Accordion (connectivity)
+    document.querySelectorAll(".accItem").forEach(item => {
+      const btn = item.querySelector(".accBtn");
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".accItem").forEach(i => i.classList.remove("active"));
+        item.classList.add("active");
+      });
+    });
+
+    // GSAP Animations (only for sections marked "Need Animation")
+    window.addEventListener("load", () => {
+      gsap.registerPlugin(ScrollTrigger);
+
+      // Hero bg subtle zoom out
+      gsap.fromTo("#heroBg",
+        { scale: 1.08 },
+        { scale: 1.02, duration: 1.6, ease: "power3.out" }
+      );
+
+      // Hero text stagger
+      gsap.to("#heroKicker", {
+        opacity: 1,
+        y: 0,
+        duration: 0.8,
+        ease: "power3.out",
+        delay: 0.15
+      });
+
+      gsap.utils.toArray("#heroTitle .reveal").forEach((el, i) => {
+        gsap.to(el, {
+          opacity: 1,
+          y: 0,
+          duration: 0.9,
+          ease: "power3.out",
+          delay: 0.25 + i * 0.12
+        });
+      });
+
+      // Scroll reveal (fade-up)
+      gsap.utils.toArray(".reveal").forEach((el) => {
+        gsap.to(el, {
+          opacity: 1,
+          y: 0,
+          duration: 0.85,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 86%",
+          }
+        });
+      });
+
+      // Scale reveal for images/cards
+      gsap.utils.toArray(".revealScale:not(.legacyTile)").forEach((el) => {
+        gsap.to(el, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.9,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: el,
+            start: "top 88%",
+          }
+        });
+      });
+
+      gsap.utils.toArray(".configBox").forEach(box => {
+        box.addEventListener("mouseenter", () => {
+          gsap.to(box.querySelector("img"), { scale: 1.08, filter: "blur(0px)", duration: 0.5, ease: "power2.out" });
+        });
+        box.addEventListener("mouseleave", () => {
+          gsap.to(box.querySelector("img"), { scale: 1.05, filter: "blur(3px)", duration: 0.5, ease: "power2.out" });
+        });
+      });
+
+      // Hallmark chips stagger
+      gsap.from(".chipRow .chip", {
+        opacity: 0,
+        y: 10,
+        duration: 0.5,
+        ease: "power2.out",
+        stagger: 0.06,
+        scrollTrigger: {
+          trigger: ".chipRow",
+          start: "top 85%"
+        }
+      });
+
+      // Legacy tiles stagger (premium)
+      const legacyTl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".legacyGrid",
+          start: "top 85%",
+          once: true
+        }
+      });
+
+      legacyTl.to(".legacyTile.revealScale", {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.7,
+        ease: "power3.out"
+      });
+
+      legacyTl.from(".legacyTile", {
+        y: 10,
+        duration: 0.6,
+        ease: "power2.out",
+        stagger: 0.1
+      }, "-=0.25");
+
+    });
+
+// ================================
+// Configurations Classic/Premium switch
+// ================================
+(function(){
+  const selects = document.querySelectorAll(".configSelect");
+  if(!selects.length) return;
+
+  const configImages = {
+    cfg1: {
+      classic: "rectangle62 (1).webp",
+      premium: "rectangle63.webp"
+    },
+    cfg2: {
+      classic: "rectangle64 (1).webp",
+      premium: "rectangle64.webp"
+    }
+  };
+
+  selects.forEach(sel=>{
+    sel.addEventListener("change", ()=>{
+      const targetId = sel.dataset.target;
+      const mode = sel.value;
+      const img = document.getElementById(targetId);
+      if(!img) return;
+
+      img.src = configImages[targetId][mode] || img.src;
+
+      // smooth transition
+      gsap.fromTo(img, { opacity: 0.4, scale: 1.03 }, { opacity: 0.85, scale: 1.05, duration: 0.35, ease: "power2.out" });
+    });
+  });
+})();
+
+
+// ================================
+// Legacy slider (4 pages) with auto-slide
+// ================================
+(function(){
+  const track = document.getElementById("legacyTrack");
+  const prev = document.getElementById("legacyPrev");
+  const next = document.getElementById("legacyNext");
+
+  if(!track || !prev || !next) return;
+
+  const pages = track.querySelectorAll(".legacyGrid");
+  let idx = 0;
+  let autoSlideInterval;
+
+  function go(i){
+    idx = (i + pages.length) % pages.length;
+    track.style.transform = `translateX(${-idx * 100}%)`;
+  }
+
+  prev.addEventListener("click", ()=>{
+    go(idx - 1);
+    resetAutoSlide(); // reset timer on manual click
+  });
+
+  next.addEventListener("click", ()=>{
+    go(idx + 1);
+    resetAutoSlide(); // reset timer on manual click
+  });
+
+  go(0);
+
+  // ================================
+  // Auto-slide
+  // ================================
+  function startAutoSlide(){
+    autoSlideInterval = setInterval(()=>{
+      go(idx + 1);
+    }, 5000); // change slide every 5 seconds
+  }
+
+  function resetAutoSlide(){
+    clearInterval(autoSlideInterval);
+    startAutoSlide();
+  }
+
+  startAutoSlide();
+
+})();
+
+document.addEventListener("DOMContentLoaded", () => {
+  requestAnimationFrame(() => initHallmarksPinScroll());
+
+  window.addEventListener("load", () => {
+    if (window.ScrollTrigger) ScrollTrigger.refresh();
+  });
+});
+
+function initHallmarksPinScroll() {
+  if (!window.gsap || !window.ScrollTrigger) return;
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const wrap = document.getElementById("hallmarksPinWrap");
+  const pinTarget = document.getElementById("hallmarksSection");
+
+  const track = document.getElementById("hallmarksTrack");
+  const knob = document.getElementById("hallmarksKnob");
+  const bar = document.getElementById("hallmarksBar");
+
+  if (!wrap || !pinTarget || !track || !knob || !bar) return;
+
+  const items = Array.from(track.querySelectorAll(".hallmarksItem"));
+  const total = items.length;
+
+  function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+
+  function getStepWidth(){
+    const gap = parseFloat(getComputedStyle(track).gap) || 0;
+    const w = items[0].getBoundingClientRect().width;
+    return w + gap;
+  }
+
+  function setIndex(idx){
+    idx = clamp(idx, 0, total - 1);
+
+    const step = getStepWidth();
+
+    // Move track so selected item is centered-ish
+    const moveX = -(idx * step);
+
+    track.style.transform = `translate3d(${moveX}px,0,0)`;
+
+    // active class
+    items.forEach((el,i)=>el.classList.toggle("isActive", i === idx));
+
+    // knob position
+    const snapped = idx / (total - 1);
+    knob.style.left = `${6 + snapped * 88}%`;
+  }
+
+  // remove old triggers for safety
+  ScrollTrigger.getAll().forEach(st=>{
+    if(st.trigger === wrap) st.kill();
+  });
+
+  ScrollTrigger.create({
+    trigger: wrap,
+    pin: pinTarget,
+    start: "top -45%",
+    end: () => "+=" + (total * 180),   // more distance = smoother
+    scrub: 1,
+    pinSpacing: true,
+    onUpdate: (self)=>{
+      const idx = Math.round(self.progress * (total - 1));
+      setIndex(idx);
+    }
+  });
+
+  // init
+  setIndex(0);
+
+  // refresh after images load
+  window.addEventListener("load", ()=>ScrollTrigger.refresh());
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  const body = document.body;
+
+  const openBtn = document.querySelector(".navMenu");
+  const drawer = document.querySelector("#mobileNav");
+  const closeBtn = drawer?.querySelector(".navClose");
+  const overlay = document.querySelector(".navOverlay");
+
+  if (!openBtn || !drawer || !overlay || !closeBtn) {
+    console.warn("Navbar elements missing");
+    return;
+  }
+
+  let isOpen = false;
+
+  function openNav() {
+    if (isOpen) return;
+    isOpen = true;
+
+    body.classList.add("navOpen");
+    openBtn.setAttribute("aria-expanded", "true");
+    drawer.setAttribute("aria-hidden", "false");
+
+    closeBtn.focus({ preventScroll: true });
+  }
+
+  function closeNav() {
+    if (!isOpen) return;
+    isOpen = false;
+
+    body.classList.remove("navOpen");
+    openBtn.setAttribute("aria-expanded", "false");
+    drawer.setAttribute("aria-hidden", "true");
+
+    openBtn.focus({ preventScroll: true });
+  }
+
+  // OPEN button (mouse + touch)
+  openBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    openNav();
+  });
+
+  // CLOSE button (mouse + touch)
+  closeBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    closeNav();
+  });
+
+  // CLICK OUTSIDE (overlay)
+  overlay.addEventListener("click", (e) => {
+    e.preventDefault();
+    closeNav();
+  });
+
+  // ESC close
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && body.classList.contains("navOpen")) {
+      closeNav();
+    }
+  });
+
+  // Close when clicking any link inside drawer
+  drawer.addEventListener("click", (e) => {
+    const link = e.target.closest("a");
+    if (!link) return;
+    closeNav();
+  });
+
+   /* ================================
+     Swipe to close (works everywhere)
+     Swipe RIGHT to close
+     ================================ */
+
+     let startX = 0;
+  let startY = 0;
+  let swiping = false;
+
+  document.addEventListener("touchstart", (e) => {
+    if (!body.classList.contains("navOpen")) return;
+
+    const t = e.touches[0];
+    startX = t.clientX;
+    startY = t.clientY;
+    swiping = true;
+  }, { passive: true });
+
+  document.addEventListener("touchmove", (e) => {
+    if (!swiping || !body.classList.contains("navOpen")) return;
+
+    const t = e.touches[0];
+    const dx = t.clientX - startX;
+    const dy = t.clientY - startY;
+
+    // if horizontal swipe, block scroll
+    if (Math.abs(dx) > Math.abs(dy)) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  document.addEventListener("touchend", (e) => {
+    if (!swiping || !body.classList.contains("navOpen")) return;
+    swiping = false;
+
+    const t = e.changedTouches[0];
+    const dx = t.clientX - startX;
+    const dy = t.clientY - startY;
+
+    // swipe RIGHT threshold to close
+    if (Math.abs(dx) > Math.abs(dy) && dx > 60) {
+      closeNav();
+    }
+  }, { passive: true });
+});
+
+document.querySelectorAll(".navLinks a.navLink").forEach(link => {
+  link.addEventListener("click", (e) => {
+    const hash = link.getAttribute("href");
+    if (!hash || !hash.startsWith("#")) return;
+
+    const target = document.querySelector(hash);
+    if (!target) return;
+
+    e.preventDefault();
+
+    // smooth scroll
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    // remove hash from URL (without reload)
+    history.replaceState(null, "", window.location.pathname + window.location.search);
+  });
+});
+
+  </script>
+
+</body>
+</html>
